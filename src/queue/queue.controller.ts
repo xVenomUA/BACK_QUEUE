@@ -30,15 +30,16 @@ export class QueueController {
     return this.queueService.findAll(user);
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.queueService.findOne(+id);
-  // }
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.queueService.remove(+id);
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateQueueDto: UpdateQueueDto) {
-  //   return this.queueService.update(+id, updateQueueDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateQueueDto: UpdateQueueDto) {
+    return this.queueService.update(+id, updateQueueDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

@@ -15,10 +15,10 @@ export class CreateQueueDto {
   service: string;
 
   @IsNotEmpty({ message: 'Date is required' })
-  @IsDateString(
-    {},
-    { message: 'Date must be in a valid ISO format (YYYY-MM-DD)' },
-  )
+  // @IsDateString(
+  //   {},
+  //   { message: 'Date must be in a valid ISO format (YYYY-MM-DD)' },
+  // )
   date: string;
 
   @IsOptional()

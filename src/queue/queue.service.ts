@@ -17,8 +17,13 @@ export class QueueService {
       ...createQueueDto,
       user: user.userId,
     });
-
-    return await this.queueRepository.save(queue);
+    const result = await this.queueRepository.save(queue);
+    const newQueue = {
+      ...result,
+      user: undefined,
+      isMyQueue: true,
+    };
+    return newQueue;
   }
 
   async findAll(user: any): Promise<any[]> {
@@ -58,11 +63,12 @@ export class QueueService {
     return this.queueRepository.save(queue);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<any> {
     const result = await this.queueRepository.delete(id);
 
     if (result.affected === 0) {
       throw new Error(`Queue with ID ${id} not found`);
     }
+    return { id };
   }
 }
